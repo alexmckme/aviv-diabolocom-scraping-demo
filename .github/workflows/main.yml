@@ -1,0 +1,44 @@
+name: run main.py
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 13,18 * * 1-5' # At minute 0 past hour 13 and 18 on every day-of-week from Monday through Friday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v3 # checkout the repository content to github runner
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # install the python version needed
+          cache: 'pip'
+          
+      - name: install python packages
+        run: |
+          pip install -r requirements.txt
+          
+      - name: execute py script # run main.py
+        env:
+          A: ${{ secrets.A }}
+          B: ${{ secrets.B }}
+          C: ${{ secrets.C }}
+          D: ${{ secrets.D }}
+          E: ${{ secrets.E }}
+          F: ${{ secrets.F }}
+          JSON_CLIENT_EMAIL: ${{ secrets.JSON_CLIENT_EMAIL }}
+          JSON_CLIENT_ID: ${{ secrets.JSON_CLIENT_ID }}
+          JSON_CLIENT_X509_CERT_URL: ${{ secrets.JSON_CLIENT_X509_CERT_URL }}
+          JSON_PRIVATE_KEY_ID: ${{ secrets.JSON_PRIVATE_KEY_ID }}
+          JSON_PROJECT_ID: ${{ secrets.JSON_PROJECT_ID }}
+          LOGINDIABOGSL: ${{ secrets.LOGINDIABOGSL }}
+          LOGINDIABOMA: ${{ secrets.LOGINDIABOMA }}
+          PWDDIABOGSL: ${{ secrets.PWDDIABOGSL }}
+          PWDDIABOMA: ${{ secrets.PWDDIABOMA }}
+        run: python main.py
+          
