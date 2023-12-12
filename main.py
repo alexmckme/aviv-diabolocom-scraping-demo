@@ -197,7 +197,7 @@ maj_onglet("SF GSL - Appels", extraire_rapport_gsl("00OSa000000Di85MAC"))
 maj_onglet("SF MA - Appels", extraire_rapport("00O7S000000hAW8UAM"))
 
 # mise à jour le
-now = datetime.now()
-dt_string = now.strftime("%d/%m/%Y %H:%M:%S") + timedelta(hours=1)
+now = datetime.now() + timedelta(hours=1)
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 onglet_principal = fichier_gsheet.worksheet("Synthèse Mois en Cours")
 onglet_principal.update("A1", "Dernière mise à jour Stats Appels (= Diabolocom) et OneShots (=Salesforce) : " + dt_string)
