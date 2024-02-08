@@ -35,7 +35,7 @@ cred = {
 sa = gspread.service_account_from_dict(cred)
 
 #id_fichier = input("Entrez l'ID du Gsheet :")
-id_fichier = "1NcyzXlV0iPYAro6_HwDnPjT3oI_7ikMrTpzhk6hKNuo"
+id_fichier = os.environ["sheets_id"]
 fichier_gsheet = sa.open_by_key(id_fichier)
 
 # Fonctions extraire rapports
